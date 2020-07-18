@@ -8,7 +8,7 @@
 
 // ///////
 
-// Example
+// Solved by smart people
 function longestWord(sen) {
   const wordArr = sen.toLowerCase().match(/[a-z0-9]+/g)
 
@@ -24,10 +24,11 @@ function longestWord(sen) {
     return longestWordArr
   }
 }
+// END Solved by smart people
 
 // My
 function myLongestWord(sen) {
-  const words = sen.split(" ")
+  const words = sen.toLowerCase().match(/[a-z0-9]+/g) // stolen :(
 
   const wordsLengths = words.map((word) => word.split("").length)
 
@@ -43,11 +44,14 @@ function myLongestWord(sen) {
     return occurrences[0]
   }
 }
+// END My
 
 console.log(myLongestWord("Hi there, my name is Eugene"))
 console.log(longestWord("Hello, my name is Brad"))
 
-// /////////
+//
+// ////////////////////////////////////////////////////////////
+//
 
 // CHALLENGE 2: ARRAY CHUNKING
 // Split an array into chunked arrays of a specific length
@@ -62,24 +66,81 @@ function chunkArray(arr, len) {
   return resultArr
 }
 
-console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8], 3))
+// console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8], 3))
+
+//
+// ////////////////////////////////////////////////////////////
+//
 
 // CHALLENGE 3: FLATTEN ARRAY
 // Take an array of arrays and flatten to a single array
 // ex. [[1, 2], [3, 4], [5, 6], [7]] = [1, 2, 3, 4, 5, 6, 7]
 
-function flattenArray(arrays) {}
+const flattenArray = (arrays) => arrays.flat(1)
+
+// console.log(flattenArray([[1, 2], [3, 4], [5, 6], [7]]))
+
+//
+// ////////////////////////////////////////////////////////////
+//
 
 // CHALLENGE 4: ANAGRAM
 // Return true if anagram and false if not
 // ex. 'elbow' === 'below'
 // ex. 'Dormitory' === 'dirty room##'
 
-function isAnagram(str1, str2) {}
+const formatString = (str) =>
+  str.replace(/[^\w]/g, "").toLowerCase().split("").sort().join("")
+
+const isAnagram = (str1, str2) => formatString(str1) === formatString(str2)
+
+// console.log(isAnagram("Dormitory", "dirty room##"))
+
+//
+// ////////////////////////////////////////////////////////////
+//
 
 // CHALLENGE 5: LETTER CHANGES
 // Change every letter of the string to the one that follows it and capitalize the vowels
 // Z should turn to A
 // ex. 'hello there' === 'Ifmmp UIfsf'
 
-function letterChanges(str) {}
+// Solved by smart people
+function letterChanges(str) {
+  let newStr = str.toLowerCase().replace(/[a-z]/gi, (char) => {
+    if (char === "z" || char === "Z") {
+      return "a"
+    } else {
+      return String.fromCharCode(char.charCodeAt() + 1)
+    }
+  })
+
+  newStr = newStr.replace(/a|e|i|o|u/gi, (vowel) => vowel.toUpperCase())
+
+  return newStr
+}
+// END Solved by smart people
+
+// My
+function myLetterChanges(str) {
+  const basicArr = str.replace(/[^\w]/g, " ").toLowerCase().split("")
+
+  const newCharCodesArr = basicArr.map((letter) => {
+    if (letter === "z") {
+      return 97
+    } else if (letter !== " ") {
+      return letter.charCodeAt() + 1
+    }
+  })
+
+  const finalLettersArr = newCharCodesArr.map((char) => {
+    const letter = String.fromCharCode(char)
+    return letter.match(/[aeiou]/gi) ? letter.toUpperCase() : letter
+  })
+
+  return finalLettersArr.join("")
+}
+// END My
+
+console.log(letterChanges("hello there z"))
+console.log(myLetterChanges("hello there z"))
