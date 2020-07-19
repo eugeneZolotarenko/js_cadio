@@ -46,8 +46,8 @@ function myLongestWord(sen) {
 }
 // END My
 
-console.log(myLongestWord("Hi there, my name is Eugene"))
-console.log(longestWord("Hello, my name is Brad"))
+// console.log(myLongestWord("Hi there, my name is Eugene"))
+// console.log(longestWord("Hello, my name is Brad"))
 
 //
 // ////////////////////////////////////////////////////////////
@@ -142,5 +142,5 @@ function myLetterChanges(str) {
 }
 // END My
 
-console.log(letterChanges("hello there z"))
-console.log(myLetterChanges("hello there z"))
+// console.log(letterChanges("hello there z"))
+// console.log(myLetterChanges("hello there z"))
