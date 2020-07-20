@@ -79,11 +79,17 @@ function getStringWithMissingLetters(str) {
   }
 }
 
-console.log(getStringWithMissingLetters("abcdefqrstuvwxyz"))
+// console.log(getStringWithMissingLetters("abcdefqrstuvwxyz"))
 
 // CHALLENGE 6: EVEN & ODD SUMS
 // Take in an array and return an array of the sums of even and odd numbers
 // ex.
 // evenOddSums([50, 60, 60, 45, 71]) == [170, 116]
 
-function evenOddSums() {}
+function evenOddSums(arr) {
+  const evenNumbers = arr.filter((num) => num % 2 !== 1).reduce((a, b) => a + b)
+  const oddNumbers = arr.filter((num) => num % 2 === 1).reduce((a, b) => a + b)
+  return [evenNumbers, oddNumbers]
+}
+
+console.log(evenOddSums([50, 60, 60, 45, 71]))
