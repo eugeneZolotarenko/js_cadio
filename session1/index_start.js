@@ -34,37 +34,58 @@ const capitalizeLetters = (str) =>
 
 // CHALLENGE 5: MAX CHARACTER
 // Return the character that is most common in a string
+// If there are 2 characters with the same amount of occurrences - return array with this letters
+
 // ex. maxCharacter('javascript') == 'a'
+// ex. maxCharacter('ssaa') == [s, a]
+
 const notUniqueCharacters = (arr) => [
   ...new Set(arr.filter((value, index, self) => self.indexOf(value) !== index)),
 ]
 
-const getOccurrences = (array, value) => array.filter((v) => v === value).length
+const countOccurrences = (array, char) =>
+  array.filter((item) => item === char).length
 
 function maxCharacter(str) {
   const arrFromStr = str.split("")
+
   const occurrencesArr = notUniqueCharacters(arrFromStr).map((char) => ({
     char,
-    times: getOccurrences(arrFromStr, char),
+    times: countOccurrences(arrFromStr, char),
   }))
-  const res = Math.max.apply(
-    Math,
-    occurrencesArr.map(function (o) {
-      return o.times
-    })
+
+  const maxOccurrencesTimes = Math.max.apply(
+    this,
+    occurrencesArr.map((o) => o.times)
   )
-  return (obj = occurrencesArr.find(function (o) {
-    return o.times == res
-  }))
-  // const allOcurances = arrFromStr.filter((letter) =>
-  //   notUniqueCharacters(arrFromStr).includes(letter)
-  // ).length
-  // return allOcurances
-  // return allOcurances.map((e, i) => (e === "a" ? e : "")).filter(String)
+
+  const finalOccurrences = occurrencesArr.filter(
+    (obj) => obj.times === maxOccurrencesTimes
+  )
+
+  return finalOccurrences.length === 1
+    ? finalOccurrences[0].char
+    : finalOccurrences.map((obj) => obj.char)
 }
 
-console.log(maxCharacter("javasssscripta"))
+// console.log(maxCharacter("javascript"))
 
 // CHALLENGE 6: FIZZBUZZ
 // Write a program that prints all the numbers from 1 to 100. For multiples of 3, instead of the number, print "Fizz", for multiples of 5 print "Buzz". For numbers which are multiples of both 3 and 5, print "FizzBuzz".
-function fizzBuzz() {}
+function fizzBuzz() {
+  const numbersArr = new Array(100).fill(1)
+  return numbersArr.map((a, i) => {
+    const num = i + 1
+    if (num % 5 === 0 && num % 3 === 0) {
+      return "FizzBuzz"
+    } else if (num % 5 === 0) {
+      return "Buzz"
+    } else if (num % 3 === 0) {
+      return "Fizz"
+    } else {
+      return num
+    }
+  })
+}
+
+console.log(fizzBuzz())
